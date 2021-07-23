@@ -17,3 +17,18 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Netflix(models.Model):
+    show_id = models.CharField(max_length=100)
+    show_type = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    director = models.CharField(max_length=100)
+    cast = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    date_added = models.CharField(max_length=100)
+    release_year = models.IntegerField()
+    rating = models.CharField(max_length=100)
+    duration = models.CharField(max_length=100)
+    listed_in = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
