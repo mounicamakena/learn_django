@@ -1,6 +1,7 @@
 from uuid import uuid4
+import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
@@ -8,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from app.models import UserProfile, Employee
+from app.models import UserProfile, Employee, Netflix
 
 from app.forms import UserCreateForm, EmployeeForm
 # Create your views here.
@@ -146,3 +147,13 @@ def employee_edit(request):
         return redirect('employee_home')
 
     return render(request, 'edit.html', {"form": form})
+
+
+def netflix_list(request):
+    return render(request, 'netflix.html')
+
+
+def netflix_data(request):
+    netflix = list(Netflix.objects.all().values())
+
+    return JsonResponse(netflix, safe=False)
