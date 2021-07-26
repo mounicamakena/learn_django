@@ -33,4 +33,9 @@ urlpatterns = [
     path('employee_edit/', views.employee_edit, name='employee_edit'),
     path('netflix_list/', views.netflix_list, name='netflix_list'),
     path('netflix_data/', views.netflix_data, name='netflix_data'),
+    path('netflix/', views.netflix, name='netflix')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

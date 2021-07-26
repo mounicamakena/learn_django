@@ -1,3 +1,4 @@
+import os
 from uuid import uuid4
 import json
 
@@ -10,8 +11,9 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from app.models import UserProfile, Employee, Netflix
-
+from django.core.files.storage import FileSystemStorage
 from app.forms import UserCreateForm, EmployeeForm
+from app.script_xls import bulkcreate_netflix
 # Create your views here.
 
 
@@ -150,6 +152,18 @@ def employee_edit(request):
 
 
 def netflix_list(request):
+    return render(request, 'netflix_list.html')
+
+
+def netflix(request):
+    if request.method == 'POST':
+        upload_file = request.FILES['document']
+
+        fs = FileSystemStorage()
+        filename = fs.save(upload_file.name, upload_file)
+        filepath = os.path.join(fs.location, filename)
+        bulkcreate_netflix(filepath)
+        return redirect('/netflix_list')
     return render(request, 'netflix.html')
 
 

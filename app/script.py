@@ -6,6 +6,7 @@ temp_array = []
 
 with open(file_name, mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
+    # csv_reader is array of dicts
     for line in csv_reader:
         netflix = Netflix(
             show_id=line['show_id'],

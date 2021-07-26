@@ -1,0 +1,30 @@
+>>> from chems.models import Product, Category
+>>> Product.objects.all()
+<QuerySet []>
+>>> Category.objects.all()
+<QuerySet []>
+>>> Category.objects.create(name="chemicals")
+<Category: Category object (1)>
+>>> Category.objects.all()
+<QuerySet [<Category: Category object (1)>]>
+>>> x = Category.objects.all()
+>>> type(x)
+<class 'django.db.models.query.QuerySet'>
+>>> x[0].name
+'chemicals'
+>>> x = Category.objects.first()
+>>> x
+<Category: Category object (1)>
+>>> x.name
+'chemicals'
+>>> Category.objects.count()
+1
+>>> Product.objects.create(name= 'sodium chloride', category=x, price=1, image_path="abc", discount=0)
+<Product: Product object (1)>
+>>> product = Product.objects.first()
+>>> product.name
+'sodium chloride'
+>>> product.category
+<Category: Category object (1)>
+>>> product.category.name
+'chemicals'
