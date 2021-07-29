@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Pagination</h3>
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>image_name</th>
+            <th>tags</th>
+
+        </tr>
+    </thead>
+</table>
+
+<!-- {% for page in no_of_pages %}
+
+<a href="{{page}}">{{page}}</a>
+
+{% endfor %} -->
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            serverSide: true,
+            ordering: false,
+            searching: false,
+            ajax: {
+                url: "/planet_paginate_data",
+                method: "GET",
+            },
+            columns: [
+                { "data": "image_name" },
+                { "data": "tags" },
+
+            ]
+        })
+    });
+
+</script>
+{% endblock %}

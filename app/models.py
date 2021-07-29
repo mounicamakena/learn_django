@@ -32,3 +32,8 @@ class Netflix(models.Model):
     duration = models.CharField(max_length=100)
     listed_in = models.CharField(max_length=100)
     description = models.CharField(max_length=100)
+
+
+class Planet(models.Model):
+    image_name = models.CharField(max_length=100)
+    tags = models.CharField(max_length=100)

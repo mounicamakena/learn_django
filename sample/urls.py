@@ -36,7 +36,10 @@ urlpatterns = [
     path('netflix_paginate_data/',
          views.netflix_paginate_data, name='netflix_paginate_data'),
     path('netflix_paginate/', views.netflix_paginate, name='netflix_paginate'),
-    path('netflix/', views.netflix, name='netflix')
+    path('netflix/', views.netflix, name='netflix'),
+    path('planet_paginate/', views.planet_paginate, name='planet_paginate'),
+    path('planet_paginate_data/', views.planet_paginate_data,
+         name='planet_paginate_data'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

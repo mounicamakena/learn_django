@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from app.models import UserProfile, Employee, Netflix
+from app.models import UserProfile, Employee, Netflix, Planet
 from django.core.files.storage import FileSystemStorage
 from app.forms import UserCreateForm, EmployeeForm
 from app.script_xls import bulkcreate_netflix
@@ -205,3 +205,34 @@ def netflix_data(request):
     netflix = list(Netflix.objects.all().values())
 
     return JsonResponse(netflix, safe=False)
+
+
+def planet_paginate(request):
+    planet = Planet.objects.all()
+    no_of_rows = 1000
+    p = Paginator(planet, no_of_rows)
+    no_of_pages = list(range(1, p.num_pages+1))
+    context = {
+        "no_of_pages": no_of_pages,
+    }
+
+    return render(request, 'planet_paginate.html', context=context)
+
+
+def planet_paginate_data(request):
+    start = int(request.GET['start'])
+    length = int(request.GET['length'])
+    page_no = int((start + length)/length)
+
+    planet = Planet.objects.all()
+    p = Paginator(planet, length)
+    page_display = p.page(page_no)
+    data = list(page_display.object_list.values())
+
+    context = {
+        "draw": request.GET['draw'],
+        "data": data,
+        "recordsTotal": len(planet),
+        "recordsFiltered": len(planet),
+    }
+    return JsonResponse(context, safe=False)
