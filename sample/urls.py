@@ -33,6 +33,9 @@ urlpatterns = [
     path('employee_edit/', views.employee_edit, name='employee_edit'),
     path('netflix_list/', views.netflix_list, name='netflix_list'),
     path('netflix_data/', views.netflix_data, name='netflix_data'),
+    path('netflix_paginate_data/',
+         views.netflix_paginate_data, name='netflix_paginate_data'),
+    path('netflix_paginate/', views.netflix_paginate, name='netflix_paginate'),
     path('netflix/', views.netflix, name='netflix')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Pagination</h3>
+
+{% for page in no_of_pages %}
+
+<a href="{{page}}">{{page}}</a>
+
+{% endfor %}
+{% endblock %}

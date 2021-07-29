@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#myTable').DataTable({
         ajax: {
-            url: "/netflix_data",
+            url: "/netflix_paginate",
             method: "GET",
             dataSrc: "",
         },

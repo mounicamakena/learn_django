@@ -2,6 +2,8 @@ import os
 from uuid import uuid4
 import json
 
+from django.core.paginator import Paginator
+
 from django.http import HttpResponse, JsonResponse
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
@@ -165,6 +167,30 @@ def netflix(request):
         bulkcreate_netflix(filepath)
         return redirect('/netflix_list')
     return render(request, 'netflix.html')
+
+
+def netflix_paginate_data(request):
+
+    # set the defaulf page value as 1
+    page_no = request.GET.get('page_id', 1)
+    # if page_id is None:
+    #     page_to_display = p.page(1)
+    netflix = Netflix.objects.all()
+    no_of_rows = 100
+    p = Paginator(netflix, no_of_rows)
+
+    page_display = p.page(page_no)
+    page_to_display = list(page_display.object_list.values())
+    return JsonResponse(page_to_display, safe=False)
+
+
+def netflix_paginate(request):
+    netflix = Netflix.objects.all()
+    no_of_rows = 100
+    p = Paginator(netflix, no_of_rows)
+    no_of_pages = list(range(1, p.num_pages+1))
+
+    return render(request, 'netflix_paginate.html', {"no_of_pages": no_of_pages})
 
 
 def netflix_data(request):
