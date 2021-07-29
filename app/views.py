@@ -171,17 +171,22 @@ def netflix(request):
 
 def netflix_paginate_data(request):
 
-    # set the defaulf page value as 1
-    page_no = request.GET.get('page_id', 1)
-    # if page_id is None:
-    #     page_to_display = p.page(1)
-    netflix = Netflix.objects.all()
-    no_of_rows = 100
-    p = Paginator(netflix, no_of_rows)
+    start = int(request.GET['start'])
+    length = int(request.GET['length'])
+    page_no = int((start + length)/length)
 
+    netflix = Netflix.objects.all()
+    p = Paginator(netflix, length)
     page_display = p.page(page_no)
-    page_to_display = list(page_display.object_list.values())
-    return JsonResponse(page_to_display, safe=False)
+    data = list(page_display.object_list.values())
+
+    context = {
+        "draw": request.GET['draw'],
+        "data": data,
+        "recordsTotal": len(netflix),
+        "recordsFiltered": len(netflix),
+    }
+    return JsonResponse(context, safe=False)
 
 
 def netflix_paginate(request):
@@ -189,8 +194,11 @@ def netflix_paginate(request):
     no_of_rows = 100
     p = Paginator(netflix, no_of_rows)
     no_of_pages = list(range(1, p.num_pages+1))
+    context = {
+        "no_of_pages": no_of_pages,
+    }
 
-    return render(request, 'netflix_paginate.html', {"no_of_pages": no_of_pages})
+    return render(request, 'netflix_paginate.html', context=context)
 
 
 def netflix_data(request):
