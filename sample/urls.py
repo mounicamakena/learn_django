@@ -40,6 +40,9 @@ urlpatterns = [
     path('planet_paginate/', views.planet_paginate, name='planet_paginate'),
     path('planet_paginate_data/', views.planet_paginate_data,
          name='planet_paginate_data'),
+    path('planet_data/', views.planet_data, name='planet_data'),
+    path('planet_data_display/', views.planet_data_dispaly,
+         name='planet_data_display'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

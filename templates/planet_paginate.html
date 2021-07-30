@@ -8,6 +8,11 @@
         <tr>
             <th>image_name</th>
             <th>tags</th>
+            <th>bike</th>
+            <th>auto</th>
+            <th>car</th>
+            <th>bus</th>
+            <th>taxi</th>
 
         </tr>
     </thead>
@@ -26,11 +31,18 @@
             searching: false,
             ajax: {
                 url: "/planet_paginate_data",
+
                 method: "GET",
+                dataSrc: "",
             },
             columns: [
                 { "data": "image_name" },
                 { "data": "tags" },
+                { "data": "bike" },
+                { "data": "auto" },
+                { "data": "car" },
+                { "data": "bus" },
+                { "taxi": "taxi" }
 
             ]
         })

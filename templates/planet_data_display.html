@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<h3> No Pagination</h3>
+<table id="myTable">
+    <thead>
+        <tr>
+            <th>image_name</th>
+            <th>tags</th>
+            <th>bike</th>
+            <th>auto</th>
+            <th>car</th>
+            <th>bus</th>
+            <th>taxi</th>
+
+        </tr>
+    </thead>
+</table>
+
+<!-- {% for page in no_of_pages %}
+
+<a href="{{page}}">{{page}}</a>
+
+{% endfor %} -->
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            // serverSide: true,
+            ordering: false,
+            // searching: false,
+            "paging": false,
+            ajax: {
+                // url: "/planet_paginate_data",
+                url: "/planet_data",
+                method: "GET",
+                dataSrc: "",
+            },
+            columns: [
+                { "data": "image_name" },
+                { "data": "tags" },
+                { "data": "bike" },
+                { "data": "auto" },
+                { "data": "car" },
+                { "data": "bus" },
+                { "data": "taxi" }
+
+            ]
+        })
+    });
+
+</script>
+{% endblock %}

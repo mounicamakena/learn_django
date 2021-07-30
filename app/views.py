@@ -236,3 +236,13 @@ def planet_paginate_data(request):
         "recordsFiltered": len(planet),
     }
     return JsonResponse(context, safe=False)
+
+
+def planet_data(request):
+    planet = list(Planet.objects.all().values())
+
+    return JsonResponse(planet, safe=False)
+
+
+def planet_data_dispaly(request):
+    return render(request, 'planet_data_display.html')

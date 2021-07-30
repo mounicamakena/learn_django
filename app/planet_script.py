@@ -10,7 +10,12 @@ with open(file_name, mode='r') as csv_file:
     for line in csv_reader:
         planet = Planet(
             image_name=line['image_name'],
-            tags=line['tags']
+            tags=line['tags'],
+            bike=line['bike'],
+            auto=line['auto'],
+            car=line['car'],
+            bus=line['bus'],
+            taxi=line['taxi']
 
         )
 

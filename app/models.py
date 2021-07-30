@@ -37,3 +37,8 @@ class Netflix(models.Model):
 class Planet(models.Model):
     image_name = models.CharField(max_length=100)
     tags = models.CharField(max_length=100)
+    bike = models.CharField(max_length=100)
+    auto = models.CharField(max_length=100)
+    car = models.CharField(max_length=100)
+    bus = models.CharField(max_length=100)
+    taxi = models.CharField(max_length=100)
