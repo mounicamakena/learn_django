@@ -31,9 +31,8 @@
             searching: false,
             ajax: {
                 url: "/planet_paginate_data",
-
                 method: "GET",
-                dataSrc: "",
+
             },
             columns: [
                 { "data": "image_name" },
@@ -42,9 +41,13 @@
                 { "data": "auto" },
                 { "data": "car" },
                 { "data": "bus" },
-                { "taxi": "taxi" }
+                { "data": "taxi" }
 
-            ]
+            ],
+            scrollY: 200,
+            scroller: {
+                loadingIndicator: true
+            },
         })
     });
 
