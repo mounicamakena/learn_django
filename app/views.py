@@ -16,7 +16,7 @@ from app.models import UserProfile, Employee, Netflix, Planet
 from django.core.files.storage import FileSystemStorage
 from app.forms import UserCreateForm, EmployeeForm
 from app.script_xls import bulkcreate_netflix
-from app.tasks import send_email
+from app.tasks import send_email_with_template_attachment
 # Create your views here.
 
 
@@ -132,7 +132,7 @@ def employee_new(request):
         if form.is_valid():
             form.save()
             email = form.cleaned_data['email']
-            send_email.delay(email)
+            send_email_with_template_attachment.delay(email)
         return redirect('employee_home')
     else:
         form = EmployeeForm()
